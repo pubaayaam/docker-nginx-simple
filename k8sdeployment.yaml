@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      #app: nginx
+      io.kompose.service: nginx
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        #app: nginx
+        io.kompose.service: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: admins-MBP:5000/docker-nginx-simple:latest
+        imagePullPolicy: IfNotPresent
+        #image: nginx:1.7.9
+        ports:
+        - containerPort: 80
